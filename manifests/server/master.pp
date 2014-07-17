@@ -200,14 +200,14 @@ class ldap::server::master(
   }
 
   $msg_prefix = 'SSL enabled. You must specify'
-  $msg_suffix = '(filename). It should be located at puppet:///files/ldap'
+  $msg_suffix = '(filename). It should be located at puppet:///private/ldap'
 
   if($ssl) {
 
     if(!$ssl_ca) { fail("${msg_prefix} ssl_ca ${msg_suffix}") }
     file { 'ssl_ca':
       ensure  => present,
-      source  => "puppet:///files/ldap/${ssl_ca}",
+      source  => "puppet:///private/ldap/${ssl_ca}",
       path    => "${ldap::params::ssl_prefix}/${ssl_ca}",
       mode    => '0644',
     }
@@ -215,7 +215,7 @@ class ldap::server::master(
     if(!$ssl_cert) { fail("${msg_prefix} ssl_cert ${msg_suffix}") }
     file { 'ssl_cert':
       ensure  => present,
-      source  => "puppet:///files/ldap/${ssl_cert}",
+      source  => "puppet:///private/ldap/${ssl_cert}",
       path    => "${ldap::params::ssl_prefix}/${ssl_cert}",
       mode    => '0644',
     }
@@ -223,7 +223,7 @@ class ldap::server::master(
     if(!$ssl_key) { fail("${msg_prefix} ssl_key ${msg_suffix}") }
     file { 'ssl_key':
       ensure  => present,
-      source  => "puppet:///files/ldap/${ssl_key}",
+      source  => "puppet:///private/ldap/${ssl_key}",
       path    => "${ldap::params::ssl_prefix}/${ssl_key}",
     }
 
